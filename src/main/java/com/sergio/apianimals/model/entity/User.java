@@ -47,13 +47,16 @@ public class User implements Serializable{
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="USER_ID")
-	private List<Authority> authorities;
+	private List<Authority> authorities = null;
+	
+	@Column(name="IMAGE_USER")
+	private String image;
 
 	public User() {
 	}
 
 	public User(String name, String lastName, String email, String password, Boolean enabled, FamilyGroup familyGroup,
-			List<Authority> authorities) {
+			List<Authority> authorities, String image) {
 		this.name = name;
 		this.lastName = lastName;
 		this.email = email;
@@ -61,6 +64,7 @@ public class User implements Serializable{
 		this.enabled = enabled;
 		this.familyGroup = familyGroup;
 		this.authorities = authorities;
+		this.image = image;
 	}
 
 	public Long getId() {
@@ -127,11 +131,19 @@ public class User implements Serializable{
 		this.authorities = authorities;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", lastName=" + lastName + ", email=" + email + ", password="
 				+ password + ", enabled=" + enabled + ", familyGroup=" + familyGroup + ", authorities="
-				+ authorities + "]";
+				+ authorities + ", image=" + image + "]";
 	}
 
 }

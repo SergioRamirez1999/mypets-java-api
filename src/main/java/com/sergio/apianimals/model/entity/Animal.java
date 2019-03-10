@@ -46,16 +46,21 @@ public class Animal  implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="ID_GROUP")
 	private FamilyGroup familyGroup;
+	
+	@Column(name="IMAGE_ANIMAL")
+	private String image = null;
 
 	public Animal() {
 	}
 
-	public Animal(String name, Date birthdate, Double weight, AnimalType animalType, FamilyGroup familyGroup) {
+	public Animal(String name, Date birthdate, Double weight, AnimalType animalType, FamilyGroup familyGroup,
+			String image) {
 		this.name = name;
 		this.birthdate = birthdate;
 		this.weight = weight;
 		this.animalType = animalType;
 		this.familyGroup = familyGroup;
+		this.image = image;
 	}
 
 	public Long getId() {
@@ -106,11 +111,18 @@ public class Animal  implements Serializable {
 		this.familyGroup = familyGroup;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		return "Animal [id=" + id + ", name=" + name + ", birthdate=" + birthdate + ", weight=" + weight
-				+ ", animalType=" + animalType + ", familyGroup=" + familyGroup + "]";
+				+ ", animalType=" + animalType + ", familyGroup=" + familyGroup + ", image=" + image + "]";
 	}
-	
 
 }

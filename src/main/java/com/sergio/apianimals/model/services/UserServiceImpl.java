@@ -70,7 +70,6 @@ public class UserServiceImpl implements IUserService{
 		}
 		user.setEmail(user.getEmail().toLowerCase());
 		user.setAuthorities(Arrays.asList(new Authority(RoleType.USER)));
-		user.setFamilyGroup(null);
 		user.setPassword(psw.encode(user.getPassword()));
 
 		Optional<User> userSaved = Optional.of(userDao.save(user));
