@@ -81,7 +81,7 @@ public class UserServiceImpl implements IUserService{
 
 	@Override
 	public Optional<User> update(User user, Long id) throws UserBadFormatException, UserNotFoundException, UserNotUpdatedException {
-		if(!isUserValid(user) && user.getEnabled() != null && user.getAuthorities() != null) {
+		if(!isUserValid(user) &&  isUserEnabled(user) && user.getAuthorities() != null) {
 			throw new UserBadFormatException("EL USUARIO NO CUMPLE CON EL FORMATO");
 		}
 		Optional<User> userExist = this.findOne(id);
@@ -112,6 +112,13 @@ public class UserServiceImpl implements IUserService{
 				&& (user.getEmail() != null && user.getEmail() != "")
 				) {
 			
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isUserEnabled(User user) {
+		if(user.getEnabled() != null && user.getEnabled()==true ) {
 			return true;
 		}
 		return false;
